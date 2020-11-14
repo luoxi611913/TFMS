@@ -4,6 +4,7 @@ import com.TF.dao.TestDao;
 import com.TF.service.intf.TestDaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -29,5 +30,11 @@ public class Hello {
         System.out.println( testDao.selectByConf());
 
         return "success";
+    }
+
+    @RequestMapping("/testThy")
+    public String index(Model model) {
+        model.addAttribute("name","测试模板引擎");
+        return "testThymeleaf";
     }
 }
