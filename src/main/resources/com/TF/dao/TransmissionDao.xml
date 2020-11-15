@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.TF.dao.TransmissionDao">
+    <select id="selectByParam" parameterType="com.TF.model.Transmission" resultType="com.TF.model.Transmission">
+       select id,
+              start_user,
+              jumper_port,
+              jumper_position,
+              link_one,
+              link_two,
+              local_port,
+              open_path,
+              channel_code,
+              device_port,
+              end_user,
+              full_routing,
+              remarks
+       from transmission
+        <where>
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="start_user != null and start_user != ''">
+                and start_user = #{start_user}
+            </if>
+            <if test="jumper_port != null and jumper_port != ''">
+                and jumper_port = #{jumper_port}
+            </if>
+            <if test="jumper_position != null and jumper_position != ''">
+                and jumper_position = #{jumper_position}
+            </if>
+            <if test="link_one != null and link_one != ''">
+                and link_one = #{link_one}
+            </if>
+            <if test="link_two != null and link_two != ''">
+                and link_two = #{link_two}
+            </if>
+            <if test="local_port != null and local_port != ''">
+                and local_port = #{local_port}
+            </if>
+            <if test="open_path != null and open_path != ''">
+                and open_path = #{open_path}
+            </if>
+            <if test="channel_code != null and channel_code != ''">
+                and channel_code = #{channel_code}
+            </if>
+            <if test="device_port != null and device_port != ''">
+                and device_port = #{device_port}
+            </if>
+            <if test="end_user != null and end_user != ''">
+                and end_user = #{end_user}
+            </if>
+            <if test="full_routing != null and full_routing != ''">
+                and full_routing = #{full_routing}
+            </if>
+            <if test="remarks != null and remarks != ''">
+                and remarks = #{remarks}
+            </if>
+        </where>
+    </select>
+</mapper>
