@@ -3,24 +3,65 @@ package com.TF.model;
 /**
  * @Author ZhaoJiaLin
  * @Date 18:36 2020/11/15
- * @Param
- * @return
  **/
 public class Transmission {
 
+  /**
+   *序号
+   */
   private String id;
+  /**
+   *起始用户
+   */
   private String startUser;
+  /**
+   *跳接端口号
+   */
   private String jumperPort;
+  /**
+   *跳接位置
+   */
   private String jumperPosition;
+  /**
+   *架间1位置
+   */
   private String linkOne;
+  /**
+   *架间2位置
+   */
   private String linkTwo;
+  /**
+   *成端位置
+   */
   private String localPort;
+  /**
+   *设备开通方向
+   */
   private String openPath;
+  /**
+   *信道代号
+   */
   private String channelCode;
+  /**
+   *设备端口号
+   */
   private String devicePort;
+  /**
+   *终点用户
+   */
   private String endUser;
+  /**
+   *全程路由
+   */
   private String fullRouting;
+  /**
+   *备 注
+   */
   private String remarks;
+  /**
+   * 用户ID
+   */
+  private String userId;
 
 
   public String getId() {
@@ -40,6 +81,14 @@ public class Transmission {
     this.startUser = startUser;
   }
 
+
+  public void setUserId(String userId) {
+    this.userId = userId;
+  }
+
+  public String getUserId() {
+    return userId;
+  }
 
   public String getJumperPort() {
     return jumperPort;

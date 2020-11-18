@@ -2,60 +2,152 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.TF.dao.TransmissionDao">
     <select id="selectByParam" parameterType="com.TF.model.Transmission" resultType="com.TF.model.Transmission">
-       select id,
-              start_user,
-              jumper_port,
-              jumper_position,
-              link_one,
-              link_two,
-              local_port,
-              open_path,
-              channel_code,
-              device_port,
-              end_user,
-              full_routing,
-              remarks
-       from transmission
+        select id,
+        start_user,
+        jumper_port,
+        jumper_position,
+        link_one,
+        link_two,
+        local_port,
+        open_path,
+        channel_code,
+        device_port,
+        end_user,
+        full_routing,
+        remarks
+        from transmission
         <where>
             <if test="id != null and id != ''">
                 and id = #{id}
             </if>
-            <if test="start_user != null and start_user != ''">
-                and start_user = #{start_user}
+            <if test="startUser != null and startUser != ''">
+                and start_user = #{startUser}
             </if>
-            <if test="jumper_port != null and jumper_port != ''">
-                and jumper_port = #{jumper_port}
+            <if test="jumperPort != null and jumperPort != ''">
+                and jumper_port = #{jumperPort}
             </if>
-            <if test="jumper_position != null and jumper_position != ''">
-                and jumper_position = #{jumper_position}
+            <if test="jumperPosition != null and jumperPosition != ''">
+                and jumper_position = #{jumperPosition}
             </if>
-            <if test="link_one != null and link_one != ''">
-                and link_one = #{link_one}
+            <if test="linkOne != null and linkOne != ''">
+                and link_one = #{linkOne}
             </if>
-            <if test="link_two != null and link_two != ''">
-                and link_two = #{link_two}
+            <if test="linkTwo != null and linkTwo != ''">
+                and link_two = #{linkTwo}
             </if>
-            <if test="local_port != null and local_port != ''">
-                and local_port = #{local_port}
+            <if test="localPort != null and localPort != ''">
+                and local_port = #{localPort}
             </if>
-            <if test="open_path != null and open_path != ''">
-                and open_path = #{open_path}
+            <if test="openPath != null and openPath != ''">
+                and open_path = #{openPath}
             </if>
-            <if test="channel_code != null and channel_code != ''">
-                and channel_code = #{channel_code}
+            <if test="channelCode != null and channelCode != ''">
+                and channel_code = #{channelCode}
             </if>
-            <if test="device_port != null and device_port != ''">
-                and device_port = #{device_port}
+            <if test="devicePort != null and devicePort != ''">
+                and device_port = #{devicePort}
             </if>
-            <if test="end_user != null and end_user != ''">
-                and end_user = #{end_user}
+            <if test="endUser != null and endUser != ''">
+                and end_user = #{endUser}
             </if>
-            <if test="full_routing != null and full_routing != ''">
-                and full_routing = #{full_routing}
+            <if test="fullRouting != null and fullRouting != ''">
+                and full_routing = #{fullRouting}
             </if>
             <if test="remarks != null and remarks != ''">
                 and remarks = #{remarks}
             </if>
+            <if test="userId != null and userId != ''">
+                and user_id = #{userId}
+            </if>
         </where>
     </select>
+    <insert id="insert" parameterType="com.TF.model.Transmission">
+        insert into transmission
+       (id,
+       start_user,
+       jumper_port,
+       jumper_position,
+       link_one,
+       link_two,
+       local_port,
+       open_path,
+       channel_code,
+       device_port,
+       end_user,
+       full_routing,
+       remarks)
+       values
+       (
+        #{id},
+        #{startUser},
+        #{jumperPort},
+        #{jumperPosition},
+        #{linkOne},
+        #{linkTwo},
+        #{localPort},
+        #{openPath},
+        #{channelCode},
+        #{devicePort},
+        #{endUser},
+        #{fullRouting},
+        #{remarks}
+       )
+    </insert>
+    <update id="update" parameterType="com.TF.model.Transmission">
+        update transaction
+        <set>
+            <if test="id != null">
+                id=#{id},
+            </if>
+            <if test="startUser != null and startUser != ''">
+                start_user=#{startUser},
+            </if>
+            <if test="jumperPort != null and jumperPort != ''">
+                jumper_port=#{jumperPort},
+            </if>
+            <if test="jumperPosition != null and jumperPosition != ''">
+                jumper_position=#{id},
+            </if>
+            <if test="linkOne != null and linkOne != ''">
+                link_one=#{linkOne},
+            </if>
+            <if test="linkTwo != null and linkTwo != ''">
+                link_two=#{linkTwo},
+            </if>
+            <if test="localPort != null and localPort != ''">
+                local_port=#{localPort},
+            </if>
+            <if test="openPath != null and openPath != ''">
+                open_path=#{openPath},
+            </if>
+            <if test="channelCode != null and channelCode != ''">
+                channel_code=#{channelCode},
+            </if>
+            <if test="devicePort != null and devicePort != ''">
+                device_port=#{devicePort},
+            </if>
+            <if test="endUser != null and endUser != ''">
+                end_user=#{endUser},
+            </if>
+            <if test="fullRouting != null and fullRouting != ''">
+                full_routing=#{fullRouting},
+            </if>
+            <if test="remarks != null and remarks != ''">
+                remarks=#{remarks},
+            </if>
+        </set>
+        <where>
+                and start_user=#{startUser}
+                and jumper_port=#{jumperPort}
+                and channel_code=#{channelCode}
+        </where>
+    </update>
+    <delete id="delete" parameterType="com.TF.model.Transmission">
+        delete from transmission
+        <where>
+            and start_user=#{startUser}
+            and jumper_port=#{jumperPort}
+            and channel_code=#{channelCode}
+        </where>
+    </delete>
 </mapper>

@@ -1,17 +1,15 @@
-package com.TF.dao;
+package com.TF.service;
 
 import com.TF.model.Transmission;
-import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
 /**
- * @Description：传输
  * @author ZhaoJiaLin
- * @date 2020-11-15 18:05
+ * @date 2020-11-18 14:42
+ * @description：传输Service
  */
-@Mapper
-public interface TransmissionDao {
+public interface TransmissionService {
     /**
      * description: 条件查询
      * @Author ZhaoJiaLin
@@ -34,7 +32,7 @@ public interface TransmissionDao {
      * @Author ZhaoJiaLin
      * @Date 15:01 2020/11/18
      * @param transmission
-     * @return 
+     * @return
      **/
     int update(Transmission transmission);
     /**
@@ -42,7 +40,7 @@ public interface TransmissionDao {
      * @Author ZhaoJiaLin
      * @Date 15:02 2020/11/18
      * @param transmission
-     * @return 
+     * @return
      **/
     int delete(Transmission transmission);
 }
