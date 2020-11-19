@@ -24,4 +24,14 @@ public class Hello {
 
         return "success";
     }
+
+    @RequestMapping("/test/level1")
+    public String goLevel1(){
+        return "/roletest/level1";
+    }
+
+    @RequestMapping("/test/level2")
+    public String goLevel2(){
+        return "/roletest/level2";
+    }
 }
