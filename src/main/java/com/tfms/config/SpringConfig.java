@@ -13,14 +13,14 @@ import org.springframework.web.servlet.config.annotation.*;
 import java.util.List;
 
 @Configuration
-public class SpringConf implements WebMvcConfigurer {
+public class SpringConfig implements WebMvcConfigurer {
     /**
      * 在这里创建你的无Controller视图跳转
      * @param registry
      */
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("roletest/test");
+        registry.addViewController("/").setViewName("top/top");
     }
 
     @Override

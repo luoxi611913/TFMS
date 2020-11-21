@@ -1,14 +1,30 @@
 package com.tfms.config;
 
+import com.tfms.security.CustomUserService;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Bean
+    UserDetailsService customUserService(){
+        //注册UserDetailsService 的bean
+        return new CustomUserService();
+    }
+
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -16,31 +32,28 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         //关闭防止网站攻击
         http.csrf().disable();
 
-        //测试需要权限level1 以及level2
         http.authorizeRequests()
-                .antMatchers("/").permitAll()
-                .antMatchers("/test/level1").hasRole("level1")
-                .antMatchers("/test/level2").hasRole("level2");
-
-        //没有权限就去登陆
-        http.formLogin().usernameParameter("username")
-                        .passwordParameter("password")
-                .loginPage("/user/login")
-                .loginProcessingUrl("/login")
-                .failureUrl("/error")
+                .antMatchers("/","/user/regist").hasRole().permitAll()//放行注册页
+                .antMatchers("/webjars/**","/css/**","/img/**").permitAll()//放行静态资源
+                .anyRequest().authenticated()   // 其他地址的访问均需验证权限
+                .and()
+                .formLogin()
+                .loginPage("/user/login")   //  登录页
+                .loginProcessingUrl("/login") //处理表单的路径
+                .failureUrl("/error").permitAll()
+                .and()
+                .logout()
+                .logoutSuccessUrl("/");
         ;
-
-        //注销退回主页
-        http.logout().logoutSuccessUrl("/");
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
-        //从内存中取用户数据
-        auth.inMemoryAuthentication().passwordEncoder(new BCryptPasswordEncoder())
-                .withUser("tianfan").password(new BCryptPasswordEncoder().encode("123456")).roles("level1","level2").and()
-                .withUser("youke").password(new BCryptPasswordEncoder().encode("123456")).roles("level1");
+        //验证service
+        //security的密码需要指定加密格式
+        auth.userDetailsService(customUserService()).passwordEncoder(new BCryptPasswordEncoder());
+
     }
 }
 

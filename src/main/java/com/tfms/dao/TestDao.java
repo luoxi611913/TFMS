@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.Select;
 
 public interface TestDao {
 
-    @Select("SELECT COUNT(1) FROM user")
+    @Select("SELECT COUNT(1) FROM sysuser")
     public int testSelect();
 
     public int testSelect2();

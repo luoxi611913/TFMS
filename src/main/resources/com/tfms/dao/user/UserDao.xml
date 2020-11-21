@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tfms.dao.user.UserDao">
+
+    <resultMap id="userMap" type="com.tfms.model.SysUser">
+        <id property="id" column="uid"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <collection property="roles" ofType="com.tfms.model.SysRole">
+            <id property="id" column="rid"/>
+            <result column="name" property="name"/>
+        </collection>
+
+    </resultMap>
+    <!-- 用户登陆用 -->
+    <select id="findByUserName" parameterType="String" resultMap="userMap">
+        select u.*
+        ,r.name
+        from sysuser u
+        LEFT JOIN sysroleuser sru on u.uid= sru.urid
+        LEFT JOIN sysrole r on sru.rid=r.rid
+        where username= #{username}
+    </select>
+
+    <!-- 用户注册用 -->
+    <insert id="insertByUserNamePassWord" parameterType="com.tfms.model.SysUser">
+        INSERT INTO sysuser(username,password) VALUES (#{username},#{password})
+    </insert>
+</mapper>
