@@ -14,5 +14,5 @@ public interface UserDao {
     /**
      * 注册用户
      */
-    public int insertByUserNamePassWord(SysUser sysUser);
+    public int userRegister(SysUser sysUser);
 }
