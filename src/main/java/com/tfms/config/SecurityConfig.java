@@ -33,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
 
         http.authorizeRequests()
-                .antMatchers("/","/user/regist").permitAll()//放行注册页
+                .antMatchers("/","/user/regist","/transmission/**").permitAll()//放行注册页
                 .antMatchers("/webjars/**","/css/**","/img/**").permitAll()//放行静态资源
                 .anyRequest().authenticated()   // 其他地址的访问均需验证权限
                 .and()
