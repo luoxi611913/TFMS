@@ -17,6 +17,14 @@ public class SysUser {
     密码
      */
     private String password;
+    /*
+    单位
+     */
+    private String unit;
+    /*
+    姓名
+     */
+    private String name;
 
     private List<SysRole> roles;
 
@@ -42,6 +50,22 @@ public class SysUser {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public List<SysRole> getRoles() {

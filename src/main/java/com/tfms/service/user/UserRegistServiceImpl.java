@@ -15,9 +15,14 @@ public class UserRegistServiceImpl implements UserRegistService{
     UserDao userDao;
 
     @Override
+    public SysUser findByUsername(String username) {
+        return userDao.findByUserName(username);
+    }
+
+    @Override
     public int userRegist(SysUser sysUser) {
 
-        return userDao.insertByUserNamePassWord(sysUser);
+        return userDao.userRegister(sysUser);
 
     }
 }

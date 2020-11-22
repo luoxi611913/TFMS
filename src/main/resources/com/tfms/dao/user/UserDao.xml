@@ -6,6 +6,8 @@
         <id property="id" column="uid"/>
         <result property="username" column="username"/>
         <result property="password" column="password"/>
+        <result property="unit" column="unit"/>
+        <result property="name" column="name"/>
         <collection property="roles" ofType="com.tfms.model.SysRole">
             <id property="id" column="rid"/>
             <result column="name" property="name"/>
@@ -22,8 +24,16 @@
         where username= #{username}
     </select>
 
-    <!-- 用户注册用 -->
-    <insert id="insertByUserNamePassWord" parameterType="com.tfms.model.SysUser">
-        INSERT INTO sysuser(username,password) VALUES (#{username},#{password})
+<!--    &lt;!&ndash; 用户注册用 &ndash;&gt;-->
+<!--    <insert id="insertByUserNamePassWord" parameterType="com.tfms.model.SysUser">-->
+<!--        INSERT INTO sysuser(username,password) VALUES (#{username},#{password})-->
+<!--    </insert>-->
+    <!-- 用户注册 -->
+    <insert id="userRegister" parameterType="com.tfms.model.SysUser">
+        insert into sysuser values(#{username},#{password},#{unit},#{name})
     </insert>
+    <!-- 注册时用于查询是否用户名重复 -->
+    <select id="findByUsername" parameterType="java.lang.String" resultType="com.tfms.model.SysUser">
+        select * from sysuser where username=#{username};
+    </select>
 </mapper>

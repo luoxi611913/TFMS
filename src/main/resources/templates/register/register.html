@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>注册</title>
+        <link rel="stylesheet" type="text/css" href="../../static/css/common.css">
+        <link rel="stylesheet" href="../../static/css/register.css">
+		<!--导入jquery-->
+		<script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
+		<script>
+			//编写校验用户名的方法
+			function checkUsername() {
+				//获取用户名input框对应的对象,在用val方法获取input框里的内容
+				let username = $("#username").val();
+				//定义正则表达式
+				var reg_username = /^\w{3,20}$/;
+				//使用正则表达式调用test方法，传入要校验的值，返回一个boolean
+				let flag = reg_username.test(username);
+				//判断flag的值，提示对应的信息
+				if(flag){
+					//校验通过，取消边框
+					$("#username").css("border","");
+				}else {
+					//校验不通过,使其边框变为红色
+					$("#username").css("border","1px solid red")
+				}
+				return flag;
+			}
+			//编写校验密码的方法
+			function checkPassword() {
+				let password = $("#password").val();
+				var reg_password = /^\w{6,12}$/;
+				let flag = reg_password.test(password);
+				if(flag){
+					$("#password").css("border","");
+				}else {
+					$("#password").css("border","1px solid red")
+				}
+				return flag;
+			}
+			//编写校验姓名的方法
+			function checkName() {
+				let name = $("#name").val();
+				var reg_name = /^([\u4e00-\u9fa5]){2,7}$/;//只能是中文，长度是2-7
+				let flag = reg_name.test(name);
+				if(flag){
+					$("#name").css("border","");
+				}else {
+					$("#name").css("border","1px solid red")
+				}
+				return flag;
+			}
+			//编写校验单位的方法
+			function checkUnit() {
+				let unit = $("#unit").val();
+				var reg_unit = /^[a-zA-Z0-9_\u4e00-\u9fa5]+$/;//匹配任意字符
+				let flag = reg_unit.test(unit);
+				if(flag){
+					$("#unit").css("border","");
+				}else {
+					$("#unit").css("border","1px solid red")
+				}
+				return flag;
+			}
+			$(function () {
+				//提交表单的时候校验所有输入值
+				$("#registerForm").submit(function () {
+					//判断表单数据是否符合要求
+					if (checkUsername()&&checkPassword()&&checkName()&&checkUnit()){
+						//异步方式提交数据,参数是提交的路径，提交的参数，回调函数，data代表响应的数据
+						//serialize()方法可以序列表表单内容为字符串，格式是key value形式的
+						$.get("user/register",$("#registerForm").serialize(),function (data) {
+							//处理服务器响应的数据 data
+							$("#error").html(data);
+						},"text");
+					}
+					//return true，跳转页面，false不跳转页面
+					return false;
+				});
+				//对应input框发生失去焦点事件的时候调用对应的方法
+				$("#username").blur(checkUsername);
+				$("#password").blur(checkPassword);
+				$("#name").blur(checkName);
+			});
+		</script>
+    </head>
+	<body>
+        <!-- 头部 end -->
+    	<div class="rg_layout">
+    		<div class="rg_form clearfix">
+    			<div class="rg_form_left">
+    				<p>新用户注册</p>
+    				<p>USER REGISTER</p>
+    			</div>
+    			<div class="rg_form_center">
+					<div id="error" style="color: red;text-align: center"></div>
+					<!--注册表单-->
+    				<form id="registerForm" action="user/register" method="get">
+						<!--提交处理请求的标识符-->
+						<input type="hidden" name="action" value="register">
+    					<table style="margin-top: 25px;">
+    						<tr>
+    							<td class="td_left">
+    								<label for="username">账号</label>
+    							</td>
+    							<td class="td_right">
+    								<input type="text" id="username" name="username" placeholder="请输入账号">
+    							</td>
+    						</tr>
+    						<tr>
+    							<td class="td_left">
+    								<label for="password">密码</label>
+    							</td>
+    							<td class="td_right">
+    								<input type="text" id="password" name="password" placeholder="请输入密码">
+    							</td>
+    						</tr>
+							<tr>
+								<td class="td_left">
+									<label for="unit">单位</label>
+								</td>
+								<td class="td_right">
+									<input type="text" id="unit" name="unit" placeholder="请输入单位名称">
+								</td>
+							</tr>
+    						<tr>
+    							<td class="td_left">
+    								<label for="name">姓名</label>
+    							</td>
+    							<td class="td_right">
+    								<input type="text" id="name" name="name" placeholder="请输入真实姓名">
+    							</td>
+    						</tr>
+    						<tr>
+    							<td class="td_left">
+    								<label for="check">验证码</label>
+    							</td>
+    							<td class="td_right check">
+    								<input type="text" id="check" name="check" class="check">
+    								<img src="checkCode" height="32px" alt="" onclick="changeCheckCode(this)">
+									<script type="text/javascript">
+										//图片点击事件
+										function changeCheckCode(img) {
+											img.src="checkCode?"+new Date().getTime();
+                                        }
+									</script>
+    							</td>
+    						</tr>
+    						<tr>
+    							<td class="td_left"> 
+    							</td>
+    							<td class="td_right check"> 
+    								<input type="submit" class="submit" value="注册">
+									<span id="msg" style="color: red;"></span>
+    							</td>
+    						</tr>
+    					</table>
+    				</form>
+    			</div>
+    			<div class="rg_form_right">
+    				<p>
+    					已有账号？
+    					<a href="login.html">立即登录</a>
+    				</p>
+    			</div>
+    		</div>
+    	</div>
+    	
+    </body>
+</html>
