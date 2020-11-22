@@ -15,7 +15,7 @@
 		http://www.springframework.org/schema/tx/spring-tx-4.0.xsd ">
 
     <!--只扫描controller-->
-    <context:component-scan base-package="com.TF">
+    <context:component-scan base-package="com.tfms">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
 

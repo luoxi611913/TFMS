@@ -1,8 +1,7 @@
-package com.TF.controller;
+package com.tfms.controller;
 
-import com.TF.model.Transmission;
-import com.TF.service.TransmissionService;
-import jdk.nashorn.internal.ir.annotations.Reference;
+import com.tfms.model.Transmission;
+import com.tfms.service.TransmissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;

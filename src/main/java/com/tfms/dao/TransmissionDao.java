@@ -1,6 +1,6 @@
-package com.TF.dao;
+package com.tfms.dao;
 
-import com.TF.model.Transmission;
+import com.tfms.model.Transmission;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

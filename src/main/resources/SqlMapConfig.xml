@@ -20,6 +20,6 @@
 
     <!--引入映射配置文件 -->
     <mappers>
-        <package name="com.TF.dao"/>
+        <package name="com.tfms.dao"/>
     </mappers>
 </configuration>

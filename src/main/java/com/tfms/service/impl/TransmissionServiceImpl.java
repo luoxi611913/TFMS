@@ -1,9 +1,8 @@
-package com.TF.service.impl;
+package com.tfms.service.impl;
 
-import com.TF.dao.TransmissionDao;
-import com.TF.model.Transmission;
-import com.TF.service.TransmissionService;
-import jdk.nashorn.internal.ir.annotations.Reference;
+import com.tfms.dao.TransmissionDao;
+import com.tfms.model.Transmission;
+import com.tfms.service.TransmissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

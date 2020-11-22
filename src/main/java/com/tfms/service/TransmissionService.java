@@ -1,6 +1,6 @@
-package com.TF.service;
+package com.tfms.service;
 
-import com.TF.model.Transmission;
+import com.tfms.model.Transmission;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.TF.model;
+package com.tfms.model;
 
 /**
  * @Author ZhaoJiaLin

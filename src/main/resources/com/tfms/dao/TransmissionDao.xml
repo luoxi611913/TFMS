@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.TF.dao.TransmissionDao">
-    <select id="selectByParam" parameterType="com.TF.model.Transmission" resultType="com.TF.model.Transmission">
+<mapper namespace="com.tfms.dao.TransmissionDao">
+    <select id="selectByParam" parameterType="com.tfms.model.Transmission" resultType="com.tfms.model.Transmission">
         select id,
         start_user,
         jumper_port,
@@ -61,7 +61,7 @@
             </if>
         </where>
     </select>
-    <insert id="insert" parameterType="com.TF.model.Transmission">
+    <insert id="insert" parameterType="com.tfms.model.Transmission">
         insert into transmission
        (id,
        start_user,
@@ -93,7 +93,7 @@
         #{remarks}
        )
     </insert>
-    <update id="update" parameterType="com.TF.model.Transmission">
+    <update id="update" parameterType="com.tfms.model.Transmission">
         update transaction
         <set>
             <if test="id != null">
@@ -142,7 +142,7 @@
                 and channel_code=#{channelCode}
         </where>
     </update>
-    <delete id="delete" parameterType="com.TF.model.Transmission">
+    <delete id="delete" parameterType="com.tfms.model.Transmission">
         delete from transmission
         <where>
             and start_user=#{startUser}
