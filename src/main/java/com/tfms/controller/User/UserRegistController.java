@@ -7,10 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
-import java.net.http.HttpResponse;
 
 @RequestMapping("/user")
 @Controller
@@ -22,6 +21,29 @@ public class UserRegistController {
     @Autowired
     PasswordEncoder passwordEncoder;
 
+    /**
+     * 账户存在验证
+     * @return
+     */
+    @RequestMapping("/usernameconfirm")
+    @ResponseBody
+    public String usernameConfirm(String username){
+
+        System.out.println("username"+username);
+
+        if(username.equals("luoxi611")){
+            return "已存在";
+        }
+
+        return "可用";
+    }
+
+    /**
+     * 执行注册
+     * @param user
+     * @param response
+     * @return
+     */
     @RequestMapping("/regist")
     public String regist(SysUser user, HttpServletResponse response){
         //调用service查询该用户名是否被注册

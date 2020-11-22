@@ -3,8 +3,8 @@
     <head>
         <meta charset="utf-8">
         <title>注册</title>
-        <link rel="stylesheet" type="text/css" href="../../static/css/common.css">
-        <link rel="stylesheet" href="../../static/css/register.css">
+        <link rel="stylesheet" type="text/css" href="/css/common.css">
+        <link rel="stylesheet" href="/css/register.css">
 		<!--导入jquery-->
 		<script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
 		<script>
@@ -20,6 +20,20 @@
 				if(flag){
 					//校验通过，取消边框
 					$("#username").css("border","");
+
+					$.ajax({
+						type: 'POST',
+						url: "/user/usernameconfirm",
+						data:{
+					username: $("#username").val()
+						},
+						success: function(data){
+							window.alert(data);
+						},
+						error: function(){
+							window.alert(data);
+						}
+					})
 				}else {
 					//校验不通过,使其边框变为红色
 					$("#username").css("border","1px solid red")
@@ -95,7 +109,7 @@
     			<div class="rg_form_center">
 					<div id="error" style="color: red;text-align: center"></div>
 					<!--注册表单-->
-    				<form id="registerForm" action="user/register" method="get">
+    				<form id="registerForm" action="/user/regist" method="post">
 						<!--提交处理请求的标识符-->
 						<input type="hidden" name="action" value="register">
     					<table style="margin-top: 25px;">
@@ -160,7 +174,7 @@
     			<div class="rg_form_right">
     				<p>
     					已有账号？
-    					<a href="login.html">立即登录</a>
+    					<a href="/user/gologin">立即登录</a>
     				</p>
     			</div>
     		</div>
