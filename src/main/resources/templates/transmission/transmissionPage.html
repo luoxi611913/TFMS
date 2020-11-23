@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org" xmlns:type="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>table模块快速使用</title>
+
+    <link  type="text/css" rel="stylesheet" href="/css/layui/css/layui.css"></head>
+<body>
+
+<table id="demo"  class="table table-striped table-sm" lay-filter="test"></table>
+
+<!-- layui插件引入 -->
+<script type="text/javascript" src="/css/layui/layui.js"></script>
+
+<script th:inline="none">
+    layui.use('table', function(){
+        var table = layui.table;
+        //第一个实例
+        table.render({
+            elem: '#demo'
+            ,height: 312
+            ,url: '/transmission/selectPageByParam' //数据接口
+            ,request: {
+                pageName: 'pageNum' //页码的参数名称，默认：page
+                ,limitName: 'pageSize' //每页数据量的参数名，默认：limit
+            }
+            ,page: true //开启分页
+            ,cols: []
+        });
+
+    });
+</script>
+</body>
+</html>
