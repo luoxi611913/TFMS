@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" style="height: 100%;">
 <head>
     <meta charset="UTF-8"/>
     <title>Insert title here</title>
 </head>
-<body>
+<body style="height: 98%;">
+<div id="head" th:include="common/com_head :: common_head"></div>
+<div style="height: calc(100% - 120px);">
 <div sec:authorize="hasRole('ADMIN')"> <
     这有尊贵的管理员可以看见这一块
 </div>
@@ -14,5 +16,7 @@
 <div>
     这是游客看到的信息
 </div>
+</div>
+<div id="foot" th:include="common/com_foot :: common_foot"></div>
 </body>
 </html>
