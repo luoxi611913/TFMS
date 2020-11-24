@@ -18,27 +18,30 @@
 				let flag = reg_username.test(username);
 				//判断flag的值，提示对应的信息
 				if(flag){
-					//校验通过，取消边框
-					$("#username").css("border","");
-
 					$.ajax({
 						type: 'POST',
 						url: "/user/usernameconfirm",
 						data:{
-					username: $("#username").val()
+						username: $("#username").val()
 						},
 						success: function(data){
 							window.alert(data);
+							//校验通过，取消边框
+							$("#username").css("border","");
+							return flag;
 						},
-						error: function(){
-							window.alert(data);
+						error: function(date){
+							window.alert(date);
+							//用户名重复，校验不通过,使其边框变为红色
+							$("#username").css("border","1px solid red")
+							return false;
 						}
 					})
 				}else {
-					//校验不通过,使其边框变为红色
-					$("#username").css("border","1px solid red")
+					//用户名不符合规范，校验不通过，使其边框变为红色
+					$("#username").css("border","1px solid red");
+					return flag;
 				}
-				return flag;
 			}
 			//编写校验密码的方法
 			function checkPassword() {
@@ -83,10 +86,7 @@
 					if (checkUsername()&&checkPassword()&&checkName()&&checkUnit()){
 						//异步方式提交数据,参数是提交的路径，提交的参数，回调函数，data代表响应的数据
 						//serialize()方法可以序列表表单内容为字符串，格式是key value形式的
-						$.get("user/register",$("#registerForm").serialize(),function (data) {
-							//处理服务器响应的数据 data
-							$("#error").html(data);
-						},"text");
+						$.post("user/register",$("#registerForm").serialize(),function (data) {},"text");
 					}
 					//return true，跳转页面，false不跳转页面
 					return false;
@@ -95,6 +95,7 @@
 				$("#username").blur(checkUsername);
 				$("#password").blur(checkPassword);
 				$("#name").blur(checkName);
+				$("#unit").blur(checkUnit);
 			});
 		</script>
     </head>
