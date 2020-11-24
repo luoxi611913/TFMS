@@ -2,6 +2,7 @@ package com.tfms.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.tfms.model.ResultVo;
 import com.tfms.model.Transmission;
 import com.tfms.service.TransmissionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,15 +25,19 @@ public class TransmissionController {
 
     @ResponseBody
     @PostMapping("/selectByParam")
-    List<Transmission> selectByParam(Transmission transmission){
+    public List<Transmission> selectByParam(Transmission transmission){
         return transmissionService.selectByParam(transmission);
     }
     @ResponseBody
     @GetMapping("/selectPageByParam")
-    PageInfo<Transmission> selectPageByParam(Transmission transmission){
+    public ResultVo selectPageByParam(Transmission transmission){
         PageHelper.startPage(transmission.getPageNum(),transmission.getPageSize());
         List<Transmission> transmissions = transmissionService.selectByParam(transmission);
-        return new PageInfo<>(transmissions);
+        PageInfo<Transmission> transmissionPageInfo = new PageInfo<>(transmissions);
+        ResultVo resultVo = new ResultVo();
+        resultVo.setCount(transmissionPageInfo.getTotal());
+        resultVo.setData(transmissions);
+        return resultVo;
     }
     @ResponseBody
     @PostMapping("/insert")

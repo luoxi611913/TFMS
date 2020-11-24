@@ -55,7 +55,7 @@ public class Transmission extends PageMessage{
    */
   private String fullRouting;
   /**
-   *备 注
+   *备注
    */
   private String remarks;
   /**
