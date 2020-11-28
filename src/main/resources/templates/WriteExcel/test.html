@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" >
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table.dataintable {
+            margin-top:15px;
+            border-collapse:collapse;
+            border:1px solid #aaa;
+            width:100%;
+        }
+        table.dataintable th {
+            vertical-align:baseline;
+            padding:5px 15px 5px 6px;
+            background-color:#3F3F3F;
+            border:1px solid #3F3F3F;
+            text-align:left;
+            color:#fff;
+        }
+        table.dataintable td {
+            vertical-align:text-top;
+            padding:6px 15px 6px 6px;
+            border:1px solid #aaa;
+            word-break: break-word;
+        }
+        table.dataintable tr:nth-child(odd) {
+            background-color:#F5F5F5;
+            height: 25px;
+            overflow: scroll;
+        }
+        table.dataintable tr:nth-child(even) {
+            background-color:#fff;
+        }
+    </style>
+</head>
+<body style="height: 98%;">
+<div id="head" th:include="common/com_head :: common_head"></div>
+<div style="height: calc(100% - 120px);">
+<div>
+    <td style="width: 100px;text-align: center;">请选择需要读取的文件</td>
+    <td style="width: 180px;"><input type="file" id="uploadExcel"/></td>
+    <td><button id="uploadFile" class="layui-btn">上传</button></td>
+</div>
+    <table class="dataintable">
+        <thead>
+        <tr type="show">
+            <th colspan="7">文件上传结果</th>
+        </tr>
+        </thead>
+        <tfoot>
+        <tr type="bz">
+            <td colspan="7" id="uploadResult">
+
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+
+
+</div>
+<div id="foot" th:include="common/com_foot :: common_foot"></div>
+</body>
+<script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    //s3上传
+    $("#uploadFile").on('click',uploadFile);
+    function uploadFile() {
+        $("#uploadResult").html();
+        var formData = new FormData();
+        formData.append('file', $('#uploadExcel')[0].files[0]);
+        var s3UploadTong=$("#s3UploadTong").val();
+        formData.append("filePath","s3UploadTong");
+        // var index = layer.load(0, {shade: [0.1,'#fff']}); //0代表加载的风格，支持0-2
+        sino.ajax({
+            url: preUrl+"/read/uploadFile",
+            type: "POST",
+            data: formData,
+            /**
+             *必须false才会自动加上正确的Content-Type
+             */
+            contentType: false,
+            /**
+             * 必须false才会避开jQuery对 formdata 的默认处理
+             * XMLHttpRequest会对 formdata 进行正确的处理
+             */
+            processData: false,
+            success: function (data) {
+                var uploadResult=JSON.stringify(data);
+                $("#uploadResult").html(uploadResult);
+                // layer.close(index);
+            },
+            error:function(){
+                // layer.close(index);
+            }
+        });
+    }
+</script>
+</html>
