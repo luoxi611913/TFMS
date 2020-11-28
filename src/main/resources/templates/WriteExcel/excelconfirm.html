@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Excel确认</title>
+</head>
+<script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    var dataList = [];
+    //s3上传
+    $(function () {
+        $("#dataConfirm").click(function () {
+            console.log(dataList);
+            $.ajax({
+                url: "/read/dataConfirm",
+                type: "POST",
+                dataType:'json',
+                contentType:'application/json; charset=utf-8',
+                data: dataList,
+                /**
+                 *必须false才会自动加上正确的Content-Type
+                 */
+                /**
+                 * 必须false才会避开jQuery对 formdata 的默认处理
+                 * XMLHttpRequest会对 formdata 进行正确的处理
+                 */
+                processData: false,
+                success: function (data) {
+                    window.alert(data);
+                },
+                error:function(){
+                    // layer.close(index);
+                }
+            });
+        });
+    });
+
+</script>
+
+<body style="height: 98%;">
+<div id="head" th:include="common/com_head :: common_head"></div>
+    <table class="table table-striped table-sm">
+        <thead>
+        <tr>
+            <th>起始用户</th>
+            <th>跳接端口号</th>
+            <th>跳接位置</th>
+            <th>架间1位置</th>
+            <th>架间2位置</th>
+            <th>成端位置</th>
+            <th>设备开通方向</th>
+            <th>信道代号</th>
+            <th>设备端口号</th>
+            <th>终点用户</th>
+            <th>全程路由</th>
+            <th>备注</th>
+        </tr>
+        </thead>
+        <tbody>
+        <script th:inline="javascript">
+            dataList = '[[${ulist}]]';
+            console.log(dataList);
+        </script>
+        <tr th:each="excelDemoModel:${ulist}" style="height: 80px;">
+            <td th:text="${excelDemoModel.startUser}"></td>
+            <td th:text="${excelDemoModel.jumperPort}"></td>
+            <td th:text="${excelDemoModel.jumperPosition}"></td>
+            <td th:text="${excelDemoModel.linkOne}"></td>
+            <td th:text="${excelDemoModel.linkTwo}"></td>
+            <td th:text="${excelDemoModel.localPort}"></td>
+            <td th:text="${excelDemoModel.openPath}"></td>
+            <td th:text="${excelDemoModel.channelCode}"></td>
+            <td th:text="${excelDemoModel.devicePort}"></td>
+            <td th:text="${excelDemoModel.endUser}"></td>
+            <td th:text="${excelDemoModel.fullRouting}"></td>
+            <td th:text="${excelDemoModel.remarks}"></td>
+
+        </tr>
+
+        </tbody>
+    </table>
+
+    <br/>
+    <input  id="dataConfirm" type="button" value="确认上传">
+</body>
+</html>

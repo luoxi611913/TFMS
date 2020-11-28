@@ -73,8 +73,8 @@
         var s3UploadTong=$("#s3UploadTong").val();
         formData.append("filePath","s3UploadTong");
         // var index = layer.load(0, {shade: [0.1,'#fff']}); //0代表加载的风格，支持0-2
-        sino.ajax({
-            url: preUrl+"/read/uploadFile",
+        $.ajax({
+            url: "/read/uploadFile",
             type: "POST",
             data: formData,
             /**

@@ -23,7 +23,7 @@ public class SpringConfig implements WebMvcConfigurer {
         registry.addViewController("/").setViewName("top/top");
         registry.addViewController("/user/gologin").setViewName("login/login");
         registry.addViewController("/user/goregist").setViewName("register/register");
-        registry.addViewController("/user/excel").setViewName("WriteExcel/test.html");
+        registry.addViewController("/user/excel").setViewName("WriteExcel/exceldemo");
     }
 
     @Override
