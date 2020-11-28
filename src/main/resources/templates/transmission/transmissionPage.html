@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org" xmlns:type="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>table</title>
+
+    <link  type="text/css" rel="stylesheet" href="/css/layui/css/layui.css"></head>
+<body>
+
+<table id="demo"  class="table table-striped table-sm" lay-filter="test"></table>
+
+<!-- layui插件引入 -->
+<script type="text/javascript" src="/css/layui/layui.js"></script>
+
+<script th:inline="none">
+    layui.use('table', function(){
+        var table = layui.table;
+        //第一个实例
+        table.render({
+            elem: '#demo'
+            ,height: 500
+            ,url: '/transmission/selectPageByParam' //数据接口
+            ,request: {
+                pageName: 'pageNum' //页码的参数名称，默认：page
+                ,limitName: 'pageSize' //每页数据量的参数名，默认：limit
+            }
+            ,page: true //开启分页
+            ,cols: [[ //表头
+                {field: 'id', title: 'ID', width:80, sort: true, fixed: 'left',align:'center'}
+                ,{field: 'startUser', title: '起始用户', width:100}
+                ,{field: 'jumperPort', title: '跳接端口号', width:100}
+                ,{field: 'jumperPosition', title: '跳接位置', width:100}
+                ,{field: 'linkOne', title: '架间1位置', width: 100}
+                ,{field: 'linkTwo', title: '架间2位置', width: 100}
+                ,{field: 'localPort', title: '成端位置', width: 100}
+                ,{field: 'openPath', title: '设备开通方向', width: 100}
+                ,{field: 'channelCode', title: '信道代号', width: 100}
+                ,{field: 'devicePort', title: '设备端口号', width: 100}
+                ,{field: 'endUser', title: '终点用户', width: 100}
+                ,{field: 'fullRouting', title: '终点用户', width: 100}
+                ,{field: 'remarks', title: '备注', width: 130}
+            ]]
+        });
+
+    });
+</script>
+</body>
+</html>
