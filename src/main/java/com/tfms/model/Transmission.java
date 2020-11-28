@@ -188,4 +188,23 @@ public class Transmission extends PageMessage{
     this.remarks = remarks;
   }
 
+  @Override
+  public String toString() {
+    return "Transmission{" +
+            "id='" + id + '\'' +
+            ", startUser='" + startUser + '\'' +
+            ", jumperPort='" + jumperPort + '\'' +
+            ", jumperPosition='" + jumperPosition + '\'' +
+            ", linkOne='" + linkOne + '\'' +
+            ", linkTwo='" + linkTwo + '\'' +
+            ", localPort='" + localPort + '\'' +
+            ", openPath='" + openPath + '\'' +
+            ", channelCode='" + channelCode + '\'' +
+            ", devicePort='" + devicePort + '\'' +
+            ", endUser='" + endUser + '\'' +
+            ", fullRouting='" + fullRouting + '\'' +
+            ", remarks='" + remarks + '\'' +
+            ", userId='" + userId + '\'' +
+            '}';
+  }
 }
